@@ -27,6 +27,14 @@ import {
 import { SCMainTemplate } from '../../components/templates/styled-components';
 import { useTheme } from '../../lib/theme-registry';
 
+interface AlertBoxProps {
+  variant?: 'success' | 'warning' | 'error' | 'info';
+}
+
+interface ProgressBarProps {
+  progress?: number;
+}
+
 const ComparisonContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
@@ -111,6 +119,73 @@ const Note = styled.div`
   margin-bottom: 24px;
   font-size: 14px;
   color: #0c5460;
+`;
+
+// Additional styled components
+const CardComponent = styled.div`
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const AlertBox = styled.div<AlertBoxProps>`
+  background: ${(props) =>
+    props.variant === 'success'
+      ? '#d4edda'
+      : props.variant === 'warning'
+      ? '#fff3cd'
+      : props.variant === 'error'
+      ? '#f8d7da'
+      : '#d1ecf1'};
+  border: 1px solid
+    ${(props) =>
+      props.variant === 'success'
+        ? '#c3e6cb'
+        : props.variant === 'warning'
+        ? '#ffeeba'
+        : props.variant === 'error'
+        ? '#f5c6cb'
+        : '#bee5eb'};
+  color: ${(props) =>
+    props.variant === 'success'
+      ? '#155724'
+      : props.variant === 'warning'
+      ? '#856404'
+      : props.variant === 'error'
+      ? '#721c24'
+      : '#0c5460'};
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  font-weight: 500;
+`;
+
+const ProgressBar = styled.div<ProgressBarProps>`
+  background: #f0f0f0;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 8px;
+  width: 100%;
+  margin-bottom: 12px;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: ${(props) => props.progress || 0}%;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border-radius: 20px;
+    transition: width 0.3s ease;
+  }
 `;
 
 export default function ComparisonPage() {
@@ -352,6 +427,114 @@ export default function ComparisonPage() {
               </ComponentGroup>
             </ComparisonSide>
           </ComparisonGrid>
+        </Section>
+
+        {/* ADDITIONAL STYLED COMPONENTS */}
+        <Section>
+          <SectionTitle>🎨 Additional Styled Components</SectionTitle>
+          <div style={{ display: 'grid', gap: '24px' }}>
+            {/* Card Component */}
+            <div>
+              <h4
+                style={{
+                  marginBottom: '16px',
+                  color: '#007bff',
+                  fontSize: '18px',
+                }}
+              >
+                Card Component
+              </h4>
+              <CardComponent>
+                <h3 style={{ margin: '0 0 12px 0', color: '#333' }}>
+                  Card Title
+                </h3>
+                <p
+                  style={{
+                    margin: '0 0 16px 0',
+                    color: '#666',
+                    lineHeight: '1.5',
+                  }}
+                >
+                  Este é um exemplo de card component com hover effects e
+                  shadow. Passe o mouse sobre este card para ver a animação.
+                </p>
+                <button
+                  style={{
+                    background: '#007bff',
+                    color: 'white',
+                    border: 'none',
+                    padding: '8px 16px',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Action Button
+                </button>
+              </CardComponent>
+            </div>
+
+            {/* Alert Box Component */}
+            <div>
+              <h4
+                style={{
+                  marginBottom: '16px',
+                  color: '#007bff',
+                  fontSize: '18px',
+                }}
+              >
+                Alert Box Component
+              </h4>
+              <AlertBox variant="success">
+                ✅ Success: Operation completed successfully!
+              </AlertBox>
+              <AlertBox variant="warning">
+                ⚠️ Warning: Please check your input data.
+              </AlertBox>
+              <AlertBox variant="error">
+                ❌ Error: Something went wrong. Please try again.
+              </AlertBox>
+              <AlertBox variant="info">
+                ℹ️ Info: Here&apos;s some useful information for you.
+              </AlertBox>
+            </div>
+
+            {/* Progress Bar Component */}
+            <div>
+              <h4
+                style={{
+                  marginBottom: '16px',
+                  color: '#007bff',
+                  fontSize: '18px',
+                }}
+              >
+                Progress Bar Component
+              </h4>
+              <div style={{ marginBottom: '12px' }}>
+                <span style={{ fontSize: '14px', color: '#666' }}>
+                  25% Complete
+                </span>
+                <ProgressBar progress={25} />
+              </div>
+              <div style={{ marginBottom: '12px' }}>
+                <span style={{ fontSize: '14px', color: '#666' }}>
+                  60% Complete
+                </span>
+                <ProgressBar progress={60} />
+              </div>
+              <div style={{ marginBottom: '12px' }}>
+                <span style={{ fontSize: '14px', color: '#666' }}>
+                  85% Complete
+                </span>
+                <ProgressBar progress={85} />
+              </div>
+              <div>
+                <span style={{ fontSize: '14px', color: '#666' }}>
+                  100% Complete
+                </span>
+                <ProgressBar progress={100} />
+              </div>
+            </div>
+          </div>
         </Section>
       </ComparisonContainer>
     </SCMainTemplate>
