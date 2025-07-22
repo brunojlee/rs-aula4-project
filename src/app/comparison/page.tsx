@@ -27,6 +27,8 @@ import {
 import { SCMainTemplate } from '../../components/templates/styled-components';
 import { useTheme } from '../../lib/theme-registry';
 
+// Types for styled components
+
 interface AlertBoxProps {
   variant?: 'success' | 'warning' | 'error' | 'info';
 }
@@ -432,6 +434,53 @@ export default function ComparisonPage() {
         {/* ADDITIONAL STYLED COMPONENTS */}
         <Section>
           <SectionTitle>🎨 Additional Styled Components</SectionTitle>
+
+          {/* Card Component Comparison */}
+          <div style={{ marginBottom: '32px' }}>
+            <h4
+              style={{
+                marginBottom: '16px',
+                color: '#007bff',
+                fontSize: '18px',
+                textAlign: 'center',
+              }}
+            >
+              Card Component Comparison
+            </h4>
+            <ComparisonGrid>
+              <ComparisonSide>
+                <SideTitle>Styled Components</SideTitle>
+                <CardComponent>
+                  <h3 style={{ margin: '0 0 12px 0', color: '#333' }}>
+                    Styled Components Card
+                  </h3>
+                  <p
+                    style={{
+                      margin: '0 0 16px 0',
+                      color: '#666',
+                      lineHeight: '1.5',
+                    }}
+                  >
+                    Este é um card feito com styled-components. Passe o mouse
+                    sobre este card para ver a animação de hover.
+                  </p>
+                  <button
+                    style={{
+                      background: '#007bff',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 16px',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    SC Action
+                  </button>
+                </CardComponent>
+              </ComparisonSide>
+            </ComparisonGrid>
+          </div>
+
           <div style={{ display: 'grid', gap: '24px' }}>
             {/* Card Component */}
             <div>
@@ -442,7 +491,7 @@ export default function ComparisonPage() {
                   fontSize: '18px',
                 }}
               >
-                Card Component
+                Individual Card Examples
               </h4>
               <CardComponent>
                 <h3 style={{ margin: '0 0 12px 0', color: '#333' }}>
