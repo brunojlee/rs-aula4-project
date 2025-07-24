@@ -1,5 +1,6 @@
 'use client';
 
+import { styled as muiStyled } from '@mui/material/styles';
 import { useState } from 'react';
 import styled from 'styled-components';
 import {
@@ -138,6 +139,54 @@ const CardComponent = styled.div`
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 `;
+
+// MUI version of CardComponent
+const MUICardComponent = muiStyled('div')(() => ({
+  background: 'white',
+  border: '1px solid #e0e0e0',
+  borderRadius: '12px',
+  padding: '24px',
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+  marginBottom: '16px',
+  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
+  },
+}));
+
+// MUI version of AlertBox
+const MUIAlertBox = muiStyled('div')<AlertBoxProps>(({ variant }) => ({
+  background:
+    variant === 'success'
+      ? '#d4edda'
+      : variant === 'warning'
+      ? '#fff3cd'
+      : variant === 'error'
+      ? '#f8d7da'
+      : '#d1ecf1',
+  border: `1px solid ${
+    variant === 'success'
+      ? '#c3e6cb'
+      : variant === 'warning'
+      ? '#ffeeba'
+      : variant === 'error'
+      ? '#f5c6cb'
+      : '#bee5eb'
+  }`,
+  color:
+    variant === 'success'
+      ? '#155724'
+      : variant === 'warning'
+      ? '#856404'
+      : variant === 'error'
+      ? '#721c24'
+      : '#0c5460',
+  borderRadius: '8px',
+  padding: '16px',
+  marginBottom: '12px',
+  fontWeight: 500,
+}));
 
 const AlertBox = styled.div<AlertBoxProps>`
   background: ${(props) =>
@@ -477,6 +526,84 @@ export default function ComparisonPage() {
                     SC Action
                   </button>
                 </CardComponent>
+              </ComparisonSide>
+
+              <ComparisonSide>
+                <SideTitle>Material UI</SideTitle>
+                <MUICardComponent>
+                  <h3 style={{ margin: '0 0 12px 0', color: '#333' }}>
+                    MUI Card
+                  </h3>
+                  <p
+                    style={{
+                      margin: '0 0 16px 0',
+                      color: '#666',
+                      lineHeight: '1.5',
+                    }}
+                  >
+                    Este é um card feito com MUI styled(). Passe o mouse sobre
+                    este card para ver a animação de hover.
+                  </p>
+                  <button
+                    style={{
+                      background: '#007bff',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 16px',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    MUI Action
+                  </button>
+                </MUICardComponent>
+              </ComparisonSide>
+            </ComparisonGrid>
+          </div>
+
+          {/* Alert Box Component Comparison */}
+          <div style={{ marginBottom: '32px' }}>
+            <h4
+              style={{
+                marginBottom: '16px',
+                color: '#007bff',
+                fontSize: '18px',
+                textAlign: 'center',
+              }}
+            >
+              Alert Box Component Comparison
+            </h4>
+            <ComparisonGrid>
+              <ComparisonSide>
+                <SideTitle>Styled Components</SideTitle>
+                <AlertBox variant="success">
+                  ✅ SC Success: Operation completed successfully!
+                </AlertBox>
+                <AlertBox variant="warning">
+                  ⚠️ SC Warning: Please check your input data.
+                </AlertBox>
+                <AlertBox variant="error">
+                  ❌ SC Error: Something went wrong. Please try again.
+                </AlertBox>
+                <AlertBox variant="info">
+                  ℹ️ SC Info: Here&apos;s some useful information for you.
+                </AlertBox>
+              </ComparisonSide>
+
+              <ComparisonSide>
+                <SideTitle>Material UI</SideTitle>
+                <MUIAlertBox variant="success">
+                  ✅ MUI Success: Operation completed successfully!
+                </MUIAlertBox>
+                <MUIAlertBox variant="warning">
+                  ⚠️ MUI Warning: Please check your input data.
+                </MUIAlertBox>
+                <MUIAlertBox variant="error">
+                  ❌ MUI Error: Something went wrong. Please try again.
+                </MUIAlertBox>
+                <MUIAlertBox variant="info">
+                  ℹ️ MUI Info: Here&apos;s some useful information for you.
+                </MUIAlertBox>
               </ComparisonSide>
             </ComparisonGrid>
           </div>
